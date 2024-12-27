@@ -1,0 +1,9 @@
+to compile the program into an executable file you need to write:
+
+$ gcc hello.c
+
+the output will be the executable file a.out
+
+$ ./a.out
+
+- Hello world

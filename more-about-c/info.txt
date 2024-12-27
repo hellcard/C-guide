@@ -1,0 +1,187 @@
+                                                                                                             More about programs on C language
+-----------------------
+Commands: 
+
+--------
+View machine code (first 20 string):
+$ objdump -D a.out | grep -A20 main.:
+
+View machine code for INTEL(first 20 strings):
+$ objdump -M intel -D a.out | grep -A20 main.:
+
+Using gdb debugger:
+$ gdb -q a.out
+--- work with gdb debugger ---
+
+Reading symbols from a.out...
+(No debugging symbols found in a.out)
+(gdb) break main
+Breakpoint 1 at 0x113d
+(gdb) info registers
+The program has no registers now.
+(gdb) run
+Starting program: a.out
+Breakpoint 1, 0x000055555555513d in main ()
+(gdb) info registers
+rax            0x555555555139      93824992235833
+rbx            0x7fffffffdd38      140737488346424
+rcx            0x555555557dd8      93824992247256
+rdx            0x7fffffffdd48      140737488346440
+rsi            0x7fffffffdd38      140737488346424
+rdi            0x1                 1
+rbp            0x7fffffffdc20      0x7fffffffdc20
+rsp            0x7fffffffdc20      0x7fffffffdc20
+r8             0x0                 0
+r9             0x7ffff7fcbf40      140737353924416
+r10            0x7fffffffd960      140737488345440
+r11            0x202               514
+r12            0x0                 0
+r13            0x7fffffffdd48      140737488346440
+r14            0x7ffff7ffd000      140737354125312
+r15            0x555555557dd8      93824992247256
+rip            0x55555555513d      0x55555555513d <main+4>
+eflags         0x246               [ PF ZF IF ]
+--Type <RET> for more, q to quit, c to continue without paging--
+cs             0x33                51
+ss             0x2b                43
+ds             0x0                 0
+es             0x0                 0
+fs             0x0                 0
+gs             0x0                 0
+fs_base        0x7ffff7da9740      140737351685952
+gs_base        0x0                 0
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 8107] will be killed.
+
+Quit anyway? (y or n) y
+
+---
+
+                                                                                                 MORE ABOUT GDB DEBUGGER
+when compiled with the -g flag, additional debugging information can be added to the program:
+$ gcc -g main.c
+$ gdb -q ./a.out
+
+--- work with gdb ---
+Reading symbols from ./a.out...
+(gdb) list
+1	#include <stdio.h>
+2	
+3	int main(){
+4		int i;
+5		for(i=0;i<10;i++){
+6			printf("Hello, World!\n");
+7		}
+8		return 0;
+9	}
+10	
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x0000000000001139 <+0>:	push   %rbp
+   0x000000000000113a <+1>:	mov    %rsp,%rbp
+   0x000000000000113d <+4>:	sub    $0x10,%rsp
+   0x0000000000001141 <+8>:	movl   $0x0,-0x4(%rbp)
+   0x0000000000001148 <+15>:	jmp    0x115d <main+36>
+   0x000000000000114a <+17>:	lea    0xeb3(%rip),%rax        # 0x2004
+   0x0000000000001151 <+24>:	mov    %rax,%rdi
+   0x0000000000001154 <+27>:	call   0x1030 <puts@plt>
+   0x0000000000001159 <+32>:	addl   $0x1,-0x4(%rbp)
+   0x000000000000115d <+36>:	cmpl   $0x9,-0x4(%rbp)
+   0x0000000000001161 <+40>:	jle    0x114a <main+17>
+   0x0000000000001163 <+42>:	mov    $0x0,%eax
+   0x0000000000001168 <+47>:	leave
+   0x0000000000001169 <+48>:	ret
+End of assembler dump.
+(gdb) break main
+Breakpoint 1 at 0x1141: file main.c, line 5.
+(gdb) run
+Starting program: --- 
+
+Breakpoint 1, main () at main.c:5
+5		for(i=0;i<10;i++){
+(gdb) i r esp
+esp            0xffffdc10          -9200
+(gdb) i r rbp
+rbp            0x7fffffffdc20      0x7fffffffdc20
+(gdb) info register esp
+esp            0xffffdc10          -9200
+(gdb) info register rsp
+rsp            0x7fffffffdc10      0x7fffffffdc10
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 8966] will be killed.
+
+Quit anyway? (y or n) y
+
+---
+
+// info register esp = i r esp
+// info register = i r
+
+$ gdb -q ./a.out
+
+--- work with gdb ---
+Reading symbols from ./a.out...
+(gdb) list
+1	#include <stdio.h>
+2	
+3	int main(){
+4		int i;
+5		for(i=0;i<10;i++){
+6			printf("Hello, World!\n");
+7		}
+8		return 0;
+9	}
+10	
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x0000000000001139 <+0>:	push   %rbp
+   0x000000000000113a <+1>:	mov    %rsp,%rbp
+   0x000000000000113d <+4>:	sub    $0x10,%rsp
+   0x0000000000001141 <+8>:	movl   $0x0,-0x4(%rbp)
+   0x0000000000001148 <+15>:	jmp    0x115d <main+36>
+   0x000000000000114a <+17>:	lea    0xeb3(%rip),%rax        # 0x2004
+   0x0000000000001151 <+24>:	mov    %rax,%rdi
+   0x0000000000001154 <+27>:	call   0x1030 <puts@plt>
+   0x0000000000001159 <+32>:	addl   $0x1,-0x4(%rbp)
+   0x000000000000115d <+36>:	cmpl   $0x9,-0x4(%rbp)
+   0x0000000000001161 <+40>:	jle    0x114a <main+17>
+   0x0000000000001163 <+42>:	mov    $0x0,%eax
+   0x0000000000001168 <+47>:	leave
+   0x0000000000001169 <+48>:	ret
+End of assembler dump.
+(gdb) break main
+Breakpoint 1 at 0x1141: file main.c, line 5.
+(gdb) run
+Starting program: --- 
+
+Breakpoint 1, main () at main.c:5
+5		for(i=0;i<10;i++){
+(gdb) i r rbp
+rbp            0x7fffffffdc20      0x7fffffffdc20
+(gdb) x/o 0x7fffffffdc20
+0x7fffffffdc20:	01
+(gdb) x/x $rbp
+0x7fffffffdc20:	0x00000001
+(gdb) x/u $rbp
+0x7fffffffdc20:	1
+(gdb) x/t $rbp
+0x7fffffffdc20:	00000000000000000000000000000001
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 9442] will be killed.
+
+Quit anyway? (y or n) y
+
+---
+ 
+// The x command allows you to view memory addresses
+//
+// o - octal number
+// x - hexadecimal number
+// u - unsigned decimal integer
+// t - binary number
