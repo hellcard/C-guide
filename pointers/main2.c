@@ -8,5 +8,6 @@ int main(){
 	*p=10;
 	printf("%p\n",p);
 	printf("%d\n",a);
+	printf("%d\n",*p);
 	return 0;
 }
