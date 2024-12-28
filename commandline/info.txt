@@ -1,0 +1,13 @@
+$ gcc main.c
+$ ./a.out
+ 
+  1 arguments were presented
+  argument #0	-	./a.out
+
+$ ./a.out a b c
+
+  4 arguments were presented
+  argument #0	-	./a.out
+  argument #1	-	a
+  argument #2	-	b
+  argument #3	-	c
