@@ -1,6 +1,13 @@
+---
+title: C-guide
+description: 
+tags: C-guide | C-concepts | C-programming
+last_update: 28.12.2024
+---
+
 <h1 align="center">Introduction</h1>
 
-<h4 align="center">Welcome, recently I had an idea to learn C for some projects, in this repository I will collect all the mini programs that show the basic concept of programming in the C programming language</h4>
+<h4 align="center">Welcome, recently I had an idea to learn C for some projects, in this repository I will collect all the mini programs that show the basic concepts of programming in the C programming language</h4>
 
 ### Navigation:
 
