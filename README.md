@@ -1,6 +1,6 @@
 ---
 title: C-guide
-description: 
+description: a simple guide to the C programming language 
 tags: C-guide | C-concepts | C-programming
 last_update: 28.12.2024
 ---
